@@ -13,7 +13,11 @@ function App() {
       <div className="app-view-footer">
         <h3 id="app-view-footer-text">
           Ape’d by{" "}
-          <a href="https://twitter.com/b3zrazli4n0" target="_blank">
+          <a
+            href="https://twitter.com/b3zrazli4n0"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span>@b3zrazli4n0</span>
           </a>{" "}
           with 💖
