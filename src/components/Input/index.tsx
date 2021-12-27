@@ -20,7 +20,11 @@ const Input: FC<InputProps> = (props: InputProps): ReactElement => {
       !ev.key.match("^[0-9]+$") &&
       ev.key !== "Backspace" &&
       !ev.ctrlKey &&
-      ev.key !== "."
+      ev.key !== "." &&
+      ev.key !== "ArrowRight" &&
+      ev.key !== "ArrowLeft" &&
+      ev.key !== "ArrowUp" &&
+      ev.key !== "ArrowDown"
     ) {
       ev.preventDefault();
     }
