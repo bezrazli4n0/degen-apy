@@ -1,6 +1,4 @@
 import { FC, ReactElement, KeyboardEvent, useState, FormEvent } from "react";
-import { DarkTheme } from "../../theme";
-import { DefaultComponentStyle, DefaultTextStyle } from "../default-style";
 
 export interface InputProps {
   description?: string;
@@ -38,18 +36,9 @@ const Input: FC<InputProps> = (props: InputProps): ReactElement => {
   };
 
   return (
-    <div
-      style={{
-        display: "inline-block",
-      }}
-    >
+    <div>
       {props.description ? (
-        <p
-          style={{
-            ...DefaultTextStyle,
-            color: DarkTheme.foregroundColor,
-          }}
-        >
+        <p className="base-component-text base-description-text">
           {props.description}
         </p>
       ) : undefined}
@@ -59,10 +48,7 @@ const Input: FC<InputProps> = (props: InputProps): ReactElement => {
         type="text"
         value={value}
         onChange={(ev) => props.onChange?.(ev.target.value)}
-        style={{
-          ...DefaultTextStyle,
-          ...DefaultComponentStyle,
-        }}
+        className="base-component base-component-text"
       />
     </div>
   );

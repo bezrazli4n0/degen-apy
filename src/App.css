@@ -1,0 +1,56 @@
+/*
+ * Define styles for global application component.
+ */
+
+:root {
+    --backgroundColor: #282828;
+    --foregroundColor: #B872FF;
+    --borderColor: var(--foregroundColor);
+    --backgroundComponentColor: #353535;
+}
+
+.app-view {
+    background-color: var(--backgroundColor);
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 13fr 1fr;
+}
+
+.app-view-footer {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#app-view-footer-text {
+    font-family: "Barlow", sans-serif;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+#app-view-footer-text > a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#app-view-footer-text > a > span {
+    text-decoration: underline;
+    color: var(--foregroundColor);
+}
+
+.app-view-main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.app-view-card {
+    width: 80%;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+}

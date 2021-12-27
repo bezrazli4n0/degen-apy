@@ -1,0 +1,39 @@
+/*
+ * Define styles for Card component.
+ */
+
+.card-component {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--borderColor);
+    grid-template-rows: repeat(9, 1fr);
+}
+
+.card-component-child-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem 2rem;
+}
+
+.card-component-divider-wrapper {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.card-component-divider {
+    width: 100%;
+    border-top: 0.3rem dashed var(--foregroundColor);
+}
+
+.card-component-stats {
+    font-family: "Barlow", sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.card-component-stats > span {
+    color: var(--foregroundColor);
+}

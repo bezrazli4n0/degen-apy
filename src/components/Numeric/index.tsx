@@ -1,6 +1,5 @@
 import { ReactElement, FC, useState, FormEvent, KeyboardEvent } from "react";
-import { DarkTheme } from "../../theme";
-import { DefaultComponentStyle, DefaultTextStyle } from "../default-style";
+import "../Base.css";
 
 export interface NumericProps {
   description?: string;
@@ -51,22 +50,14 @@ const Numeric: FC<NumericProps> = (props: NumericProps): ReactElement => {
   };
 
   return (
-    <div
-      style={{
-        display: "inline-block",
-      }}
-    >
+    <div>
       {props.description ? (
-        <p
-          style={{
-            ...DefaultTextStyle,
-            color: DarkTheme.foregroundColor,
-          }}
-        >
+        <p className="base-component-text base-description-text">
           {props.description}
         </p>
       ) : undefined}
       <input
+        className="base-component base-component-text"
         onKeyUp={handleKeyUp}
         onChange={(ev) => props.onChange?.(Number(ev.currentTarget.value))}
         onInput={handleInput}
@@ -74,10 +65,6 @@ const Numeric: FC<NumericProps> = (props: NumericProps): ReactElement => {
         min={props.min ?? undefined}
         value={value}
         type="number"
-        style={{
-          ...DefaultComponentStyle,
-          ...DefaultTextStyle,
-        }}
       />
     </div>
   );

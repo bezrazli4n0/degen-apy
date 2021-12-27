@@ -1,6 +1,5 @@
 import { ReactElement, FC, ReactNode } from "react";
-import { DarkTheme } from "../../theme";
-import { DefaultComponentStyle, DefaultTextStyle } from "../default-style";
+import "../Base.css";
 
 export interface SelectProps {
   description?: string;
@@ -10,27 +9,15 @@ export interface SelectProps {
 
 const Select: FC<SelectProps> = (props: SelectProps): ReactElement => {
   return (
-    <div
-      style={{
-        display: "inline-block",
-      }}
-    >
+    <div>
       {props.description ? (
-        <p
-          style={{
-            ...DefaultTextStyle,
-            color: DarkTheme.foregroundColor,
-          }}
-        >
+        <p className="base-component-text base-description-text">
           {props.description}
         </p>
       ) : undefined}
       <select
+        className="base-component base-component-text"
         onChange={(ev) => props.onChange?.(ev.currentTarget.value)}
-        style={{
-          ...DefaultComponentStyle,
-          ...DefaultTextStyle,
-        }}
       >
         {props.children}
       </select>
