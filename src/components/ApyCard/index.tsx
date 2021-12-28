@@ -60,7 +60,7 @@ const ApyCard: FC<CardProps> = (props: CardProps): ReactElement => {
       </div>
       <div className="card-component-child-wrapper">
         <Input
-          description="Amount $:"
+          description="Invest amount $:"
           onlyNumber
           value={props.investAmount.toString()}
           onChange={(value) => props.onChangeInvestAmount(Number(value))}

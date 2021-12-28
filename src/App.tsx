@@ -10,6 +10,7 @@ import {
   Tooltip,
   YAxis,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import { DarkTheme } from "./theme";
 
@@ -60,8 +61,27 @@ function App() {
               color={DarkTheme.borderColor}
               verticalFill={[DarkTheme.backgroundComponentColor]}
             />
-            <XAxis dataKey="day" fontFamily="Barlow" />
-            <YAxis fontFamily="Barlow" domain={["auto", "auto"]} />
+            <XAxis dataKey="day" fontFamily="Barlow" minTickGap={30} />
+            <YAxis
+              fontFamily="Barlow"
+              domain={["auto", "auto"]}
+              tickFormatter={(x, _y) => `${Number(x).toLocaleString()}$`}
+            />
+            <Legend
+              wrapperStyle={{
+                fontFamily: "Barlow",
+                fontWeight: "bold",
+              }}
+              payload={[
+                {
+                  value: `${
+                    mode === SelectOptions.AprToApy ? "APY" : "APR"
+                  } scaling`,
+                  type: "line",
+                  color: DarkTheme.borderColor,
+                },
+              ]}
+            />
             <Tooltip
               labelStyle={{
                 color: "white",
