@@ -14,6 +14,10 @@ const aprToApy = (
   days: number,
   dailyCompoundRate: number
 ): number => {
+  if (dailyCompoundRate <= 0) {
+    return apr;
+  }
+
   const compounds = days * dailyCompoundRate;
 
   return (1 + apr / compounds) ** compounds - 1;
@@ -31,6 +35,10 @@ const apyToApr = (
   days: number,
   dailyCompoundRate: number
 ): number => {
+  if (dailyCompoundRate <= 0) {
+    return apy;
+  }
+
   const compounds = days * dailyCompoundRate;
 
   return ((1 + apy) ** (1 / compounds) - 1) * compounds;

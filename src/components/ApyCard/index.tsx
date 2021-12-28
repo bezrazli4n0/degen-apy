@@ -1,37 +1,42 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement } from "react";
 import Select from "../Select";
 import Input from "../Input";
 import Numeric from "../Numeric";
-import { aprToApy, apyToApr } from "../../utils";
-import "./Card.css";
+import "./ApyCard.css";
 
-export interface CardProps {}
+/**
+ * Define `ApyCard` component properties.
+ */
+export interface CardProps {
+  basePercent: number;
+  investAmount: number;
+  compoundTimes: number;
+  calculatedPercent: number;
+  mode: SelectOptions;
+  onChangePercent: (percent: number) => void;
+  onChangeInvestAmount: (invest: number) => void;
+  onChangeCompoundTimes: (compoundTimes: number) => void;
+  onChangeMode: (mode: SelectOptions) => void;
+}
 
+/**
+ * Define `Select` component options.
+ */
 const enum SelectOptions {
   AprToApy = "APR to APY",
   ApyToApr = "APY to APR",
 }
 
-const Card: FC<CardProps> = (_props: CardProps): ReactElement => {
-  // Define local inputs state
-  const [basePercent, setBasePercent] = useState(10);
-  const [invest, setInvest] = useState(10000);
-  const [compoundTimes, setCompoundTimes] = useState(2);
-  const [mode, setMode] = useState(SelectOptions.AprToApy);
+const ApyCard: FC<CardProps> = (props: CardProps): ReactElement => {
+  // Calculate profit based on percent
+  const calculatedProfit = props.investAmount * props.calculatedPercent;
 
-  // Define local stats state
-  const calculatedPercent =
-    mode === SelectOptions.AprToApy
-      ? aprToApy(basePercent / 100, 365, compoundTimes)
-      : apyToApr(basePercent / 100, 365, compoundTimes);
-  const calculatedProfit = invest * calculatedPercent;
-
-  // Doc
+  // Handle `Select` component change event
   const handleModeChange = (value: string) => {
     if (value === SelectOptions.AprToApy) {
-      setMode(SelectOptions.AprToApy);
+      props.onChangeMode(SelectOptions.AprToApy);
     } else if (value === SelectOptions.ApyToApr) {
-      setMode(SelectOptions.ApyToApr);
+      props.onChangeMode(SelectOptions.ApyToApr);
     }
   };
 
@@ -45,27 +50,29 @@ const Card: FC<CardProps> = (_props: CardProps): ReactElement => {
       </div>
       <div className="card-component-child-wrapper">
         <Input
-          description={mode === SelectOptions.AprToApy ? "APR %:" : "APY %:"}
+          description={
+            props.mode === SelectOptions.AprToApy ? "APR %:" : "APY %:"
+          }
           onlyNumber
-          value={basePercent.toString()}
-          onChange={(value) => setBasePercent(Number(value))}
+          value={(props.basePercent * 100).toFixed(2).toString()}
+          onChange={(value) => props.onChangePercent(Number(value) / 100)}
         />
       </div>
       <div className="card-component-child-wrapper">
         <Input
           description="Amount $:"
           onlyNumber
-          value={invest.toString()}
-          onChange={(value) => setInvest(Number(value))}
+          value={props.investAmount.toString()}
+          onChange={(value) => props.onChangeInvestAmount(Number(value))}
         />
       </div>
       <div className="card-component-child-wrapper">
         <Numeric
           description="Compound rate / day:"
-          min={0}
+          min={1}
           max={100}
-          value={compoundTimes}
-          onChange={(value) => setCompoundTimes(value)}
+          value={props.compoundTimes}
+          onChange={(value) => props.onChangeCompoundTimes(value)}
         />
       </div>
       <div className="card-component-child-wrapper card-component-divider-wrapper">
@@ -73,8 +80,8 @@ const Card: FC<CardProps> = (_props: CardProps): ReactElement => {
       </div>
       <div className="card-component-child-wrapper">
         <p className="card-component-stats">
-          {mode === SelectOptions.AprToApy ? "APY" : "APR"}:{" "}
-          <span>{(calculatedPercent * 100).toFixed(2)}%</span>
+          {props.mode === SelectOptions.AprToApy ? "APY" : "APR"}:{" "}
+          <span>{(props.calculatedPercent * 100).toFixed(2)}%</span>
         </p>
       </div>
       <div className="card-component-child-wrapper">
@@ -84,8 +91,8 @@ const Card: FC<CardProps> = (_props: CardProps): ReactElement => {
       </div>
       <div className="card-component-child-wrapper">
         <p className="card-component-stats">
-          {mode === SelectOptions.AprToApy ? "APY" : "APR"} / DAY:{" "}
-          <span>{((calculatedPercent * 100) / 365).toFixed(6)}%</span>
+          {props.mode === SelectOptions.AprToApy ? "APY" : "APR"} / DAY:{" "}
+          <span>{((props.calculatedPercent * 100) / 365).toFixed(6)}%</span>
         </p>
       </div>
       <div className="card-component-child-wrapper">
@@ -98,4 +105,5 @@ const Card: FC<CardProps> = (_props: CardProps): ReactElement => {
   );
 };
 
-export default Card;
+export default ApyCard;
+export { SelectOptions };
