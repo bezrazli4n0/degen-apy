@@ -31,7 +31,9 @@ const apyToApr = (
   days: number,
   dailyCompoundRate: number
 ): number => {
-  return ((1 + apy) ** (1 / dailyCompoundRate) - 1) * days;
+  const compounds = days * dailyCompoundRate;
+
+  return ((1 + apy) ** (1 / compounds) - 1) * compounds;
 };
 
 export { aprToApy, apyToApr };
