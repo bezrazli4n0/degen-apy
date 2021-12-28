@@ -54,3 +54,24 @@
     justify-self: center;
     align-self: center;
 }
+
+@media screen and (max-width: 1200px) {
+    .app-view-card {
+        width: 95%
+    }
+
+    .app-view-main {
+        height: 200vh;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .app-view {
+        height: 205vh;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .app-view-footer {
+        grid-row: 2 / 2;
+    }
+}

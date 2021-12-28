@@ -37,3 +37,9 @@
 .card-component-stats > span {
     color: var(--foregroundColor);
 }
+
+@media screen and (max-width: 1200px) {
+    .card-component-child-wrapper {
+        padding: 0.4rem 1.5rem;
+    }
+}
